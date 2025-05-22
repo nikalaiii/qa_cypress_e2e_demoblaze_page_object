@@ -23,7 +23,7 @@ export class CartPage {
     return cy.get('#city');
   }
 
-  get mounthInput() {
+  get monthInput() {
     return cy.get('#month');
   }
 

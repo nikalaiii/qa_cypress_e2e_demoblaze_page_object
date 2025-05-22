@@ -13,19 +13,18 @@ describe('', () => {
     cy.visit('https://www.demoblaze.com/');
   });
 
-  it('should privide an abillity to buy a product woith no login', () => {
+  it('should provide an ability to buy a product with no login', () => {
     homePage.clickOnCategory('Laptops');
     homePage.clickOnProduct('Sony vaio i7');
 
     productPage.productName.should('contain.text', 'Sony vaio i7');
+    cy.window().then((win) => {
+      cy.stub(win, 'alert').as('alert');
+    });
 
     productPage.clickBuyButton();
 
     // alert detection
-
-    cy.window().then((win) => {
-      cy.stub(win, 'alert').as('alert');
-    });
 
     cy.get('@alert').should('have.been.calledOnce');
 
@@ -46,7 +45,7 @@ describe('', () => {
     cartPage.cardInput.should('be.visible').type('1233 3321 1123 3321');
     cartPage.yearInput.should('be.visible').type('1233211232321');
     cartPage.cityInput.should('be.visible').type('Warszaw');
-    cartPage.mounthInput.should('be.visible').type('January');
+    cartPage.monthInput.should('be.visible').type('January');
 
     cartPage.clickModalSubmit();
 
